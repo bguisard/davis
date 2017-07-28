@@ -1,0 +1,23 @@
+# editor config
+.vscode/
+
+# jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# custom_data
+custom_data/
+
+# models to ignore
+models/faster_rcnn_resnet101_coco_11_06_2017
+models/ssd_mobilenet_v1_coco_11_06_2017
+
+# training folder
+training_models/
+
+# pycache
+__pycache__/
+
+# extensions to ignore
+*.csv
+*.bak
+*.txt

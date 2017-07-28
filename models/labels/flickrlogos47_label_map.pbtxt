@@ -1,0 +1,235 @@
+item {
+  name: "0"
+  id: 1
+  display_name: "HP"
+}
+item {
+  name: "1"
+  id: 2
+  display_name: "adidas_symbol"
+}
+item {
+  name: "2"
+  id: 3
+  display_name: "adidas_text"
+}
+item {
+  name: "3"
+  id: 4
+  display_name: "aldi"
+}
+item {
+  name: "4"
+  id: 5
+  display_name: "apple"
+}
+item {
+  name: "5"
+  id: 6
+  display_name: "becks_symbol"
+}
+item {
+  name: "6"
+  id: 7
+  display_name: "becks_text"
+}
+item {
+  name: "7"
+  id: 8
+  display_name: "bmw"
+}
+item {
+  name: "8"
+  id: 9
+  display_name: "carlsberg_symbol"
+}
+item {
+  name: "9"
+  id: 10
+  display_name: "carlsberg_text"
+}
+item {
+  name: "10"
+  id: 11
+  display_name: "chimay_symbol"
+}
+item {
+  name: "11"
+  id: 12
+  display_name: "chimay_text"
+}
+item {
+  name: "12"
+  id: 13
+  display_name: "cocacola"
+}
+item {
+  name: "13"
+  id: 14
+  display_name: "corona_symbol"
+}
+item {
+  name: "14"
+  id: 15
+  display_name: "corona_text"
+}
+item {
+  name: "15"
+  id: 16
+  display_name: "dhl"
+}
+item {
+  name: "16"
+  id: 17
+  display_name: "erdinger_symbol"
+}
+item {
+  name: "17"
+  id: 18
+  display_name: "erdinger_text"
+}
+item {
+  name: "18"
+  id: 19
+  display_name: "esso_symbol"
+}
+item {
+  name: "19"
+  id: 20
+  display_name: "esso_text"
+}
+item {
+  name: "20"
+  id: 21
+  display_name: "fedex"
+}
+item {
+  name: "21"
+  id: 22
+  display_name: "ferrari"
+}
+item {
+  name: "22"
+  id: 23
+  display_name: "ford"
+}
+item {
+  name: "23"
+  id: 24
+  display_name: "fosters_symbol"
+}
+item {
+  name: "24"
+  id: 25
+  display_name: "fosters_text"
+}
+item {
+  name: "25"
+  id: 26
+  display_name: "google"
+}
+item {
+  name: "26"
+  id: 27
+  display_name: "guinness_symbol"
+}
+item {
+  name: "27"
+  id: 28
+  display_name: "guinness_text"
+}
+item {
+  name: "28"
+  id: 29
+  display_name: "heineken"
+}
+item {
+  name: "29"
+  id: 30
+  display_name: "milka"
+}
+item {
+  name: "30"
+  id: 31
+  display_name: "nvidia_symbol"
+}
+item {
+  name: "31"
+  id: 32
+  display_name: "nvidia_text"
+}
+item {
+  name: "32"
+  id: 33
+  display_name: "paulaner_symbol"
+}
+item {
+  name: "33"
+  id: 34
+  display_name: "paulaner_text"
+}
+item {
+  name: "34"
+  id: 35
+  display_name: "pepsi_symbol"
+}
+item {
+  name: "35"
+  id: 36
+  display_name: "pepsi_text"
+}
+item {
+  name: "36"
+  id: 37
+  display_name: "rittersport"
+}
+item {
+  name: "37"
+  id: 38
+  display_name: "shell"
+}
+item {
+  name: "38"
+  id: 39
+  display_name: "singha_symbol"
+}
+item {
+  name: "39"
+  id: 40
+  display_name: "singha_text"
+}
+item {
+  name: "40"
+  id: 41
+  display_name: "starbucks"
+}
+item {
+  name: "41"
+  id: 42
+  display_name: "stellaartois_symbol"
+}
+item {
+  name: "42"
+  id: 43
+  display_name: "stellaartois_text"
+}
+item {
+  name: "43"
+  id: 44
+  display_name: "texaco"
+}
+item {
+  name: "44"
+  id: 45
+  display_name: "tsingtao_symbol"
+}
+item {
+  name: "45"
+  id: 46
+  display_name: "tsingtao_text"
+}
+item {
+  name: "46"
+  id: 47
+  display_name: "ups"
+}

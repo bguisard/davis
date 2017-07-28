@@ -1,0 +1,7 @@
+{
+  "model_name" : "SSD - MobileNet - FLICKR LOGOS 47",
+  "model_folder" : "ssd_mobilenet_v1_flickr47",
+  "model_filename" : "frozen_inference_graph.pb",
+  "labels_filename" : "flickrlogos47_label_map.pbtxt",
+  "number_of_classes" : 47
+}
