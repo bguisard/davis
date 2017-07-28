@@ -2,6 +2,10 @@
 
 ## DeepBrand
 
+For information about the repo structure and using instructions check [notes.md](./notes.md)
+
+## Project steps
+
 ### Brand Recognition in Video Stream
 
 #### Idea
