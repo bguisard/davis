@@ -27,42 +27,51 @@ Folder to keep new datasets to fine-tune models to solve different problems
 ## Instructions
 
 ### Run
+```
 python object_detection_app.py -m './models/ssd_v1_flickr47.json'
-
+```
 
 ### Train
-
+```
 cd/Documents/insight/project/
 source ativate py27_insight
-
+```
 #### LOCAL VERSION
+```
 export PYTHONPATH=$PYTHONPATH:/home/bruno/Documents/tensorflow/models:/home/bruno/Documents/tensorflow/models/slim
+```
 
 #### PAPERSPACE VERSION
+```
 export PYTHONPATH=$PYTHONPATH:/home/paperspace/Documents/models:/home/paperspace/Documents/models/slim
-
+```
 ##### Create training records
 COMING SOON
 
-##### Training script
+##### Training script (python 2.7)
+```
 python object_detection/train.py \
     --logstoderr \
     --pipeline_config_path=./ssd_mobilenet_v1_flickr47.config \
     --train_dir=training_models/ssd_mobilenet_v1_flickr47/
-
-##### Evaluating script
+```
+##### Evaluating script (python 2.7)
+```
 python object_detection/eval.py \
     --logstoderr \
     --pipeline_config_path=./ssd_mobilenet_v1_flickr47.config \
-    --eval_dir=training_models/ssd_mobilenet_v1_flickr47/ \
+    --eval_dir=training_models/ssd_mobilenet_v1_flickr47/eval/ \
     --checkpoint_dir=training_models/ssd_mobilenet_v1_flickr47/
-
+```
 ##### Tensorboard
+```
 tensorboard --logdir=./training_models/ssd_mobilenet_v1_flickr47
-
-##### Export checkpoint to graph
+```
+##### Export checkpoint to graph (python 2.7)
+```
 python object_detection/export_inference_graph.py \
     --input_type=image_tensor \
     --pipeline_config_path=./ssd_mobilenet_v1_flickr47.config \
     --checkpoint_path=training_models/ssd_mobilenet_v1_flickr47/model.ckpt-17353 \
     --inference_graph_path=models/ssd_mobilenet_v1_flickr47/frozen_inference_graph.pb
+```
