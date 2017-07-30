@@ -46,7 +46,13 @@ export PYTHONPATH=$PYTHONPATH:/home/bruno/Documents/tensorflow/models:/home/brun
 export PYTHONPATH=$PYTHONPATH:/home/paperspace/Documents/models:/home/paperspace/Documents/models/slim
 ```
 ##### Create training records
-COMING SOON
+```
+python create_flickrlogos_tf_record.py \
+  --label_map_path=models/labels/flickrlogos47_label_map.pbtxt \
+  --data_dir=custom_data/FlickrLogos_47/ \
+  --output_path=custom_data/FlickrLogos_47/train.record \
+  --set=train
+```
 
 ##### Training script (python 2.7)
 ```
