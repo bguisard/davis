@@ -22,6 +22,20 @@ from google.protobuf import text_format
 from object_detection.protos import string_int_label_map_pb2
 
 
+def _validate_label_map(label_map):
+  """Checks if a label map is valid.
+
+  Args:
+    label_map: StringIntLabelMap to validate.
+
+  Raises:
+    ValueError: if label map is invalid.
+  """
+  for item in label_map.item:
+    if item.id < 1:
+      raise ValueError('Label map ids should be >= 1.')
+
+
 def create_category_index(categories):
   """Creates dictionary of COCO compatible categories keyed by category id.
 
@@ -43,6 +57,7 @@ def create_category_index(categories):
 
 def convert_label_map_to_categories(label_map,
                                     max_num_classes,
+                                    label_id_offset=1,
                                     use_display_name=True):
   """Loads label map proto and returns categories list compatible with eval.
 
@@ -61,15 +76,15 @@ def convert_label_map_to_categories(label_map,
       list is created with max_num_classes categories.
     max_num_classes: maximum number of (consecutive) label indices to include.
     use_display_name: (boolean) choose whether to load 'display_name' field
-      as category name.  If False of if the display_name field does not exist,
+      as category name.  If False or if the display_name field does not exist,
       uses 'name' field as category names instead.
+    label_id_offset: an integer offset for the label space
   Returns:
     categories: a list of dictionaries representing all possible categories.
   """
   categories = []
   list_of_ids_already_added = []
   if not label_map:
-    label_id_offset = 1
     for class_id in range(max_num_classes):
       categories.append({
           'id': class_id + label_id_offset,
@@ -77,7 +92,7 @@ def convert_label_map_to_categories(label_map,
       })
     return categories
   for item in label_map.item:
-    if not 0 < item.id <= max_num_classes:
+    if not 0 <= item.id - label_id_offset < max_num_classes:
       logging.info('Ignore item %d since it falls outside of requested '
                    'label range.', item.id)
       continue
@@ -91,7 +106,6 @@ def convert_label_map_to_categories(label_map,
   return categories
 
 
-# TODO: double check documentaion.
 def load_labelmap(path):
   """Loads label map proto.
 
@@ -107,6 +121,7 @@ def load_labelmap(path):
       text_format.Merge(label_map_string, label_map)
     except text_format.ParseError:
       label_map.ParseFromString(label_map_string)
+  _validate_label_map(label_map)
   return label_map
 
 

@@ -196,6 +196,7 @@ class ObjectDetectionEvaluation(object):
       logging.warn(
           'The following classes have no ground truth examples: %s',
           np.squeeze(np.argwhere(self.num_gt_instances_per_class == 0)))
+      logging.warn(self.num_gt_instances_per_class)
     for class_index in range(self.num_class):
       if self.num_gt_instances_per_class[class_index] == 0:
         continue

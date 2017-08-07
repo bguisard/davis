@@ -45,6 +45,7 @@ Example usage:
 """
 import functools
 import tensorflow as tf
+import logging
 
 from google.protobuf import text_format
 from object_detection import evaluator
@@ -57,6 +58,7 @@ from object_detection.protos import pipeline_pb2
 from object_detection.utils import label_map_util
 
 tf.logging.set_verbosity(tf.logging.INFO)
+logging.basicConfig(filename='training.log', level=logging.INFO)
 
 flags = tf.app.flags
 flags.DEFINE_boolean('eval_training_data', False,
@@ -152,7 +154,7 @@ def main(unused_argv):
   max_num_classes = max([item.id for item in label_map.item])
   categories = label_map_util.convert_label_map_to_categories(
       label_map, max_num_classes)
-
+  logging.info("evaluate")
   evaluator.evaluate(create_input_dict_fn, model_fn, eval_config, categories,
                      FLAGS.checkpoint_dir, FLAGS.eval_dir)
 

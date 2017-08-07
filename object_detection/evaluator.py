@@ -130,7 +130,7 @@ def evaluate(create_input_dict_fn, create_model_fn, eval_config, categories,
       model=model,
       create_input_dict_fn=create_input_dict_fn,
       ignore_groundtruth=eval_config.ignore_groundtruth)
-
+  logging.info(tensor_dict)
   def _process_batch(tensor_dict, sess, batch_index, counters, update_op):
     """Evaluates tensors in tensor_dict, visualizing the first K examples.
 
@@ -154,7 +154,7 @@ def evaluate(create_input_dict_fn, create_model_fn, eval_config, categories,
     """
     if batch_index >= eval_config.num_visualizations:
       if 'original_image' in tensor_dict:
-        tensor_dict = {k: v for (k, v) in tensor_dict.iteritems()
+        tensor_dict = {k: v for (k, v) in tensor_dict.items()
                        if k != 'original_image'}
     try:
       (result_dict, _) = sess.run([tensor_dict, update_op])

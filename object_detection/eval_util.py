@@ -52,7 +52,7 @@ def write_metrics(metrics, global_step, summary_dir):
 
 def evaluate_detection_results_pascal_voc(result_lists,
                                           categories,
-                                          label_id_offset=0,
+                                          label_id_offset=1,
                                           iou_thres=0.5,
                                           corloc_summary=False):
   """Computes Pascal VOC detection metrics given groundtruth and detections.
@@ -274,6 +274,7 @@ def visualize_detection_results(result_dict,
   summary_writer.close()
 
   logging.info('Detection visualizations written to summary with tag %s.', tag)
+  logging.info(result_dict["image_id"])
 
 
 # TODO: Add tests.
@@ -379,7 +380,7 @@ def run_checkpoint_once(tensor_dict,
     try:
       for batch in range(int(num_batches)):
         if (batch + 1) % 100 == 0:
-          logging.info('Running eval ops batch %d/%d', batch + 1, num_batches)
+          logging.info('Running eval ops batch %d/%d at ' + time.strftime('%Y-%m-%d-%H:%M:%S', time.gmtime()), batch + 1, num_batches)
         if not batch_processor:
           try:
             (result_dict, _) = sess.run([tensor_dict, update_op])
@@ -391,6 +392,7 @@ def run_checkpoint_once(tensor_dict,
         else:
           result_dict = batch_processor(
               tensor_dict, sess, batch, counters, update_op)
+        logging.info(result_dict['image_id'])
         for key in result_dict:
           if key in valid_keys:
             result_lists[key].append(result_dict[key])
@@ -502,9 +504,9 @@ def repeated_checkpoint_run(tensor_dict,
     if not model_path:
       logging.info('No model found in %s. Will try again in %d seconds',
                    checkpoint_dirs[0], eval_interval_secs)
-    elif model_path == last_evaluated_model_path:
-      logging.info('Found already evaluated checkpoint. Will try again in %d '
-                   'seconds', eval_interval_secs)
+    #elif model_path == last_evaluated_model_path:
+    #  logging.info('Found already evaluated checkpoint. Will try again in %d '
+    #               'seconds', eval_interval_secs)
     else:
       last_evaluated_model_path = model_path
       run_checkpoint_once(tensor_dict, update_op, summary_dir,
