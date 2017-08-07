@@ -64,3 +64,5 @@ Train an end-to-end pipeline that is able to effectively and efficiently locate 
 [3] [Increasing webcam FPS with Python and OpenCV](http://www.pyimagesearch.com/2015/12/21/increasing-webcam-fps-with-python-and-opencv/)
 
 [4] [WebRTC](https://webrtc.org/)
+
+[5] [Speed/accuracy trade-offs for modern convolutional object detectors](http://arxiv.org/abs/1611.10012)
