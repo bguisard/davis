@@ -58,7 +58,6 @@ from object_detection.protos import pipeline_pb2
 from object_detection.utils import label_map_util
 
 tf.logging.set_verbosity(tf.logging.INFO)
-logging.basicConfig(filename='training.log', level=logging.INFO)
 
 flags = tf.app.flags
 flags.DEFINE_boolean('eval_training_data', False,
@@ -80,6 +79,7 @@ flags.DEFINE_string('model_config_path', '',
 
 FLAGS = flags.FLAGS
 
+logging.basicConfig(filename='./' + eval_dir + 'eval.log', level=logging.INFO)
 
 def get_configs_from_pipeline_file():
   """Reads evaluation configuration from a pipeline_pb2.TrainEvalPipelineConfig.

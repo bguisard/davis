@@ -45,6 +45,7 @@ import functools
 import json
 import os
 import tensorflow as tf
+import logging
 
 from google.protobuf import text_format
 
@@ -86,6 +87,8 @@ flags.DEFINE_string('model_config_path', '',
                     'Path to a model_pb2.DetectionModel config file.')
 
 FLAGS = flags.FLAGS
+
+logging.basicConfig(filename='./' + train_dir + 'train.log', level=logging.INFO)
 
 
 def get_configs_from_pipeline_file():

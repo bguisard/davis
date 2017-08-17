@@ -358,6 +358,15 @@ def run_checkpoint_once(tensor_dict,
   if save_graph and not save_graph_dir:
     raise ValueError('`save_graph_dir` must be defined.')
   sess = tf.Session(master, graph=tf.get_default_graph())
+
+  # Forces the session to run on CPU
+  # comment the lines below if you have access to more than one GPU
+  config = tf.ConfigProto(
+        device_count = {'GPU': 0}
+    )
+  sess = tf.Session(config=config)
+  # End of forcing CPU block
+
   sess.run(tf.global_variables_initializer())
   sess.run(tf.local_variables_initializer())
   if restore_fn:
@@ -423,7 +432,7 @@ def repeated_checkpoint_run(tensor_dict,
                             variables_to_restore=None,
                             restore_fn=None,
                             num_batches=1,
-                            eval_interval_secs=120,
+                            eval_interval_secs=300,
                             max_number_of_evaluations=None,
                             master='',
                             save_graph=False,
@@ -504,9 +513,9 @@ def repeated_checkpoint_run(tensor_dict,
     if not model_path:
       logging.info('No model found in %s. Will try again in %d seconds',
                    checkpoint_dirs[0], eval_interval_secs)
-    #elif model_path == last_evaluated_model_path:
-    #  logging.info('Found already evaluated checkpoint. Will try again in %d '
-    #               'seconds', eval_interval_secs)
+    elif model_path == last_evaluated_model_path:
+      logging.info('Found already evaluated checkpoint. Will try again in %d '
+                   'seconds', eval_interval_secs)
     else:
       last_evaluated_model_path = model_path
       run_checkpoint_once(tensor_dict, update_op, summary_dir,
