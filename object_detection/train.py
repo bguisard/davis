@@ -88,7 +88,7 @@ flags.DEFINE_string('model_config_path', '',
 
 FLAGS = flags.FLAGS
 
-logging.basicConfig(filename='./' + train_dir + 'train.log', level=logging.INFO)
+logging.basicConfig(filename='./' + FLAGS.train_dir + 'train.log', level=logging.INFO)
 
 
 def get_configs_from_pipeline_file():
