@@ -10,6 +10,7 @@ custom_data/
 # models to ignore
 models/faster_rcnn_resnet101_coco_11_06_2017
 models/ssd_mobilenet_v1_coco_11_06_2017
+models/faster_rcnn_resnet101_50regions_flickr47
 
 # training folder
 training_models/
