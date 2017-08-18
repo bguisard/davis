@@ -16,6 +16,9 @@ models/faster_rcnn_resnet101_50regions_flickr47
 training_models/
 object_detection_old/
 
+# Jupyter notebooks folder
+notebooks/
+
 # pycache
 __pycache__/
 
