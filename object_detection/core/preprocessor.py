@@ -350,7 +350,7 @@ def random_pixel_value_scale(image, minval=0.9, maxval=1.1, seed=None):
         dtype=tf.float32,
         seed=seed)
     image = tf.multiply(image, color_coef)
-    image = tf.clip_by_value(image, 0.0, 1.0)
+    image = tf.clip_by_value(image, 0.0, 255.0)
 
   return image
 
@@ -444,7 +444,7 @@ def random_adjust_brightness(image, max_delta=0.2):
   """
   with tf.name_scope('RandomAdjustBrightness', values=[image]):
     image = tf.image.random_brightness(image, max_delta)
-    image = tf.clip_by_value(image, clip_value_min=0.0, clip_value_max=1.0)
+    image = tf.clip_by_value(image, clip_value_min=0.0, clip_value_max=255.0)
     return image
 
 
@@ -466,7 +466,7 @@ def random_adjust_contrast(image, min_delta=0.8, max_delta=1.25):
   """
   with tf.name_scope('RandomAdjustContrast', values=[image]):
     image = tf.image.random_contrast(image, min_delta, max_delta)
-    image = tf.clip_by_value(image, clip_value_min=0.0, clip_value_max=1.0)
+    image = tf.clip_by_value(image, clip_value_min=0.0, clip_value_max=255.0)
     return image
 
 
@@ -485,7 +485,7 @@ def random_adjust_hue(image, max_delta=0.02):
   """
   with tf.name_scope('RandomAdjustHue', values=[image]):
     image = tf.image.random_hue(image, max_delta)
-    image = tf.clip_by_value(image, clip_value_min=0.0, clip_value_max=1.0)
+    image = tf.clip_by_value(image, clip_value_min=0.0, clip_value_max=255.0)
     return image
 
 
@@ -507,7 +507,7 @@ def random_adjust_saturation(image, min_delta=0.8, max_delta=1.25):
   """
   with tf.name_scope('RandomAdjustSaturation', values=[image]):
     image = tf.image.random_saturation(image, min_delta, max_delta)
-    image = tf.clip_by_value(image, clip_value_min=0.0, clip_value_max=1.0)
+    image = tf.clip_by_value(image, clip_value_min=0.0, clip_value_max=255.0)
     return image
 
 
@@ -543,7 +543,7 @@ def random_distort_color(image, color_ordering=0):
       raise ValueError('color_ordering must be in {0, 1}')
 
     # The random_* ops do not necessarily clamp.
-    image = tf.clip_by_value(image, 0.0, 1.0)
+    image = tf.clip_by_value(image, 0.0, 255.0)
     return image
 
 
@@ -582,7 +582,7 @@ def random_jitter_boxes(boxes, ratio=0.05, seed=None):
     hw_coefs = tf.stack([box_height, box_width, box_height, box_width])
     hw_rand_coefs = tf.multiply(hw_coefs, rand_numbers)
     jittered_box = tf.add(box, hw_rand_coefs)
-    jittered_box = tf.clip_by_value(jittered_box, 0.0, 1.0)
+    jittered_box = tf.clip_by_value(jittered_box, 0.0, 255.0)
     return jittered_box
 
   with tf.name_scope('RandomJitterBoxes', values=[boxes]):
@@ -658,7 +658,7 @@ def _strict_random_crop_image(image,
     # boxes are [N, 4]. Lets first make them [N, 1, 4].
     boxes_expanded = tf.expand_dims(
         tf.clip_by_value(
-            boxes, clip_value_min=0.0, clip_value_max=1.0), 1)
+            boxes, clip_value_min=0.0, clip_value_max=255.0), 1)
 
     sample_distorted_bounding_box = tf.image.sample_distorted_bounding_box(
         image_shape,
@@ -698,7 +698,7 @@ def _strict_random_crop_image(image,
                                                        im_box_rank1)
     new_boxes = new_boxlist.get()
     new_boxes = tf.clip_by_value(
-        new_boxes, clip_value_min=0.0, clip_value_max=1.0)
+        new_boxes, clip_value_min=0.0, clip_value_max=255.0)
 
     result = [new_image, new_boxes, new_labels]
 
