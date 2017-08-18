@@ -22,7 +22,7 @@ I leveraged Google's pre-trained models on MS COCO and fine tuned a few differen
 
 ### Model Weights
 
-I am providing weights for a model optimized for real-time detection. This model can process up to 20 fps in a GTX1080 and achieves a 0.77 mAP@0.5IOU on the Flickr logos dataset.
+I am providing weights for a model optimized for real-time detection. This model can process up to 20 fps in a GTX1080 and achieves a 0.77 mAP on the Flickr logos dataset.
 
 Weights for different models are coming soon.
 
