@@ -25,4 +25,4 @@ __pycache__/
 # extensions to ignore
 *.csv
 *.bak
-*.txt
+
