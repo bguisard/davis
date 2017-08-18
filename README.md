@@ -1,68 +1,41 @@
-# AI Insight Fellowship - Summer 2017
+# Davis: Deep Learning Analytics for Video Streams
 
-## DeepBrand
+Recognizing brands in live video streams
 
-For information about the repo structure and using instructions check [notes.md](./notes.md)
+## Motivation
 
-## Project steps
+According to Cisco, internet video was 51% of the web traffic in 2016, and they expect this number to grow to 67% by 2021 [[1]](https://www.recode.net/2017/6/8/15757594/future-internet-traffic-watch-live-video-facebook-google-netflix). With so much content being delivered in this media format, there will be a clear need for software that can process videos and produce meaningful reports.
 
-### Brand Recognition in Video Stream
+Davis addresses the very first step in this pipeline, recognizing brands in live video streams to help companies understand how much visibility their products are getting.
 
-#### Idea
-Train an end-to-end pipeline that is able to effectively and efficiently locate brand(s) in a video stream.
+## Building Davis
 
-##### Breaking the problem
+### Architecture
 
-###### I) Identify Brands in Live video
-* Minimum Performance Requirement: 30+ fps
+Davis was built on top of Google's open source object recognition API [[2]](https://github.com/tensorflow/models/tree/master/object_detection). I had to make some changes to their original distribution to improve the training performance, but these changes are minor and if you are already familiar with their API you can use the official version.
 
-* Models - YOLO, SSD, Faster RCNN
 
-* Leverage from pre-trained models to speed training
+### Dataset
 
-###### II) scalability
-* 300 hours of video are uploaded to YouTube every minute
+I leveraged Google's pre-trained models on MS COCO and fine tuned a few different models on the FlickrLogos-47 dataset [[3]](http://www.multimedia-computing.de/flickrlogos/).
 
-* $44 million in GPUs needed to process this in real-time (30fps)
 
-* NoScope can increase processing speeds up to 1,000x for specific cases
+### Model Weights
 
-###### III) Semantic Analysis
-* Scan video sections where the brands were identified and detect possible cases of brand abuse
+I am providing weights for a model optimized for real-time detection. This model can process up to 20 fps in a GTX1080 and achieves a 0.77 mAP@0.5IOU on the Flickr logos dataset.
 
-* Send alert to brand manager if Pabuse > threshold
+Weights for different models are coming soon.
 
-#### Deliverables
+### Serving
 
-###### I) Identify Brands in Live video
-* Website that can process live video stream and identify selected brand(s)
+These models can be served in two ways, included in this repo is a local-only app that uses OpenCV to access your webcam and stream annotated frames back to the user.
 
-###### II) scalability
-* e-mail / slack bot post with all youtube videos posted on a given day with the link to the video and the time that the brand(s) appeared
+There is a web-app on this [repo](https://github.com/bguisard/davis_app) that serves the model using Flask and WebRTC instead.
 
-###### III) Semantic Analysis
-* Improve from step II, only sending alerts for abusive videos
+Building a GUI-enabled instance of OpenCV with all the correct bindings can be a hassle, so using the web-app may be a good option even if you intend to just play around with the model locally.
 
-#### Datasets
+The following links were extremely helpful in creating these two versions [[4]](https://medium.com/towards-data-science/building-a-real-time-object-recognition-app-with-tensorflow-and-opencv-b7a2b4ebdc32), [[5]](https://blog.miguelgrinberg.com/post/video-streaming-with-flask), [[6]](https://blog.miguelgrinberg.com/post/flask-video-streaming-revisited).
 
-* MS COCO
-* FlickrLogos-47
+### Compatibility
 
-#### TODO:
-* Change name, there are other 2 companies with this name already
-* Clean notes.md
-
-#### Useful Resources
-
-- Inference Optimization: fusion, quantization, reduced precision
-
-#### References
-[1] [Tensorflow Models](https://github.com/tensorflow/models)
-
-[2] [Building a Real-Time Object Recognition App with Tensorflow and OpenCV](https://medium.com/towards-data-science/building-a-real-time-object-recognition-app-with-tensorflow-and-opencv-b7a2b4ebdc32)
-
-[3] [Increasing webcam FPS with Python and OpenCV](http://www.pyimagesearch.com/2015/12/21/increasing-webcam-fps-with-python-and-opencv/)
-
-[4] [WebRTC](https://webrtc.org/)
-
-[5] [Speed/accuracy trade-offs for modern convolutional object detectors](http://arxiv.org/abs/1611.10012)
+Davis with compatibility in mind and it should work seamlessly with any TensorFlow frozen model and any image input size.
