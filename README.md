@@ -1,6 +1,6 @@
 # Davis: Deep Learning Analytics for Video Streams
 
-Recognizing brands in live video streams
+### Recognizing brands in live video streams
 
 ## Motivation
 
@@ -39,3 +39,47 @@ The following links were extremely helpful in creating these two versions [[4]](
 ### Compatibility
 
 Davis with compatibility in mind and it should work seamlessly with any TensorFlow frozen model and any image input size.
+
+
+## Dependencies
+
+On top of the dependencies listed on requirements.txt you will need OpenCV 3 with GUI enabled if you want to use the local version of the app.
+
+```
+pip install -r requirements.txt
+```
+
+## Instructions
+
+The steps below will give a brief description of how to use the model. Please refer to Google's object detection API for a more detailed walk-through of how to train it on your own dataset.
+
+### 1 - Convert your dataset to TFRecord
+```
+python create_flickrlogos_tf_record \
+    --label_map_path=PATH_TO_DATASET_LABELS \
+    --data_dir=PATH_TO_DATA_FOLDER \
+    --output_path=PATH_TO_OUTPUT_FILE
+```
+
+### 2 - Train the model
+```
+python object_detection/train.py \
+    --logstoderr \
+    --pipeline_config_path=PATH_TO_MODEL.CONFIG \
+    --train_dir=PATH_TO_MODEL
+```
+
+### 3 - "Publishing" the model
+
+```
+python object_detection/export_inference_graph.py \
+    --input_type=image_tensor \
+    --pipeline_config_path=PATH_TO_MODEL.CONFIG \
+    --checkpoint_path=PATH_TO_MODEL_CHECKPOINT \
+    --inference_graph_path=PATH_TO_PUBLISH
+```
+
+### 4 - Launching the App
+```
+python object_detection_app.py -m 'PATH_TO_MODEL_DESCRPITION.json'
+```
