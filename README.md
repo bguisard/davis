@@ -55,7 +55,6 @@ The steps below will give a brief description of how to use the model. Please re
 
 ### 1 - Export tensorflow models and tensorflow slim to path
 ``` bash
-# From tensorflow/models/
 export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
 ```
 
