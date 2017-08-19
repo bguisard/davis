@@ -58,7 +58,16 @@ The steps below will give a brief description of how to use the model. Please re
 export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
 ```
 
-### 2 - Convert your dataset to TFRecord
+### 2 - Launch the App
+``` bash
+python object_detection_app.py -m 'PATH_TO_MODEL_DESCRPITION.json'
+```
+
+### Optional steps
+
+#### I - Convert your dataset to TFRecord
+Sample script to convert the FlickrLogos dataset
+
 ``` bash
 python create_flickrlogos_tf_record \
     --label_map_path=PATH_TO_DATASET_LABELS \
@@ -66,7 +75,7 @@ python create_flickrlogos_tf_record \
     --output_path=PATH_TO_OUTPUT_FILE
 ```
 
-### 3 - Train the model
+#### II - Train the model
 ``` bash
 python object_detection/train.py \
     --logstoderr \
@@ -74,7 +83,7 @@ python object_detection/train.py \
     --train_dir=PATH_TO_MODEL
 ```
 
-### 4 - "Publishing" the model
+#### III - "Publish" the model as a frozen inference graph
 
 ``` bash
 python object_detection/export_inference_graph.py \
@@ -82,9 +91,4 @@ python object_detection/export_inference_graph.py \
     --pipeline_config_path=PATH_TO_MODEL.CONFIG \
     --checkpoint_path=PATH_TO_MODEL_CHECKPOINT \
     --inference_graph_path=PATH_TO_PUBLISH
-```
-
-### 5 - Launching the App
-``` bash 
-python object_detection_app.py -m 'PATH_TO_MODEL_DESCRPITION.json'
 ```
