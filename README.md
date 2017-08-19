@@ -53,25 +53,31 @@ pip install -r requirements.txt
 
 The steps below will give a brief description of how to use the model. Please refer to Google's object detection API for a more detailed walk-through of how to train it on your own dataset.
 
-### 1 - Convert your dataset to TFRecord
+### 1 - Export tensorflow models and tensorflow slim to path
+``` bash
+# From tensorflow/models/
+export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
 ```
+
+### 2 - Convert your dataset to TFRecord
+``` bash
 python create_flickrlogos_tf_record \
     --label_map_path=PATH_TO_DATASET_LABELS \
     --data_dir=PATH_TO_DATA_FOLDER \
     --output_path=PATH_TO_OUTPUT_FILE
 ```
 
-### 2 - Train the model
-```
+### 3 - Train the model
+``` bash
 python object_detection/train.py \
     --logstoderr \
     --pipeline_config_path=PATH_TO_MODEL.CONFIG \
     --train_dir=PATH_TO_MODEL
 ```
 
-### 3 - "Publishing" the model
+### 4 - "Publishing" the model
 
-```
+``` bash
 python object_detection/export_inference_graph.py \
     --input_type=image_tensor \
     --pipeline_config_path=PATH_TO_MODEL.CONFIG \
@@ -79,7 +85,7 @@ python object_detection/export_inference_graph.py \
     --inference_graph_path=PATH_TO_PUBLISH
 ```
 
-### 4 - Launching the App
-```
+### 5 - Launching the App
+``` bash 
 python object_detection_app.py -m 'PATH_TO_MODEL_DESCRPITION.json'
 ```
