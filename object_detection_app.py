@@ -87,7 +87,7 @@ if __name__ == '__main__':
     parser.add_argument('-q-size', '--queue-size', dest='queue_size', type=int,
                         default=8, help='Size of the queue.')
     parser.add_argument('-m', '--model', dest='model_config', type=str,
-                        default='./models/ssd_v1_coco.json', help='path to model .json')
+                        default='./models/ssd_augmented.json', help='path to model .json')
     args = parser.parse_args()
 
     model_details = json.load(open(args.model_config))
